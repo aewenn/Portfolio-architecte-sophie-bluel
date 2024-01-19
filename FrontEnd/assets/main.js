@@ -72,10 +72,10 @@ async function FilteringWorks() {
             gallery.innerHTML = ""; // On supprime l'affichage des travaux au clic
             if (buttonId !== "0") { // Si l'ID des boutons est différent de "0", le code suivant s'éxécute :
                 const WorksByCategory = AllWorks.filter((work) => { // On filtre tous les travaux
-                    return work.categoryId == buttonId; // Pour récupérer les projets qui ont un ID égal à l'ID du bouton
+                    return work.categoryId == buttonId; // Pour récupérer les travaux qui ont un ID égal à l'ID du bouton
                 });
                 WorksByCategory.forEach(work => { // Pour chaque tour de boucle
-                    CreateAWork(work); // On affiche un des tavaux
+                    CreateAWork(work); // On affiche un à un les travaux
                 });
             } else {
                 DisplayWorks();

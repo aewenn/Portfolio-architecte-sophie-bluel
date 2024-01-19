@@ -34,14 +34,21 @@ async function DisplayWorks(works) { // Cette fonction permet d'afficher dans la
 
 // Récupération des catégories pour les filtres
 
-async function GetCategories() {
+async function GetCategories() { // Cette fonction permet de récupérer les catégories (getCategories) grâce à une requête GET envoyée à l'API
     try {
-        const application = await fetch("http://localhost:5678/api/categories");
-        return await application.json(); 
+        const response = await fetch("http://localhost:5678/api/categories");
+        const responseCategoriesJson = await response.json();
+        console.log(responseCategoriesJson);
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
+
+// Affichage des filtres récupérés
+
+
+
+// Fonction init
 
 async function init() {
     const arrayWorks = await GetWorks(); // Cette variable permet de créer un tableau avec les travaux à afficher

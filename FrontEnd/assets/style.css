@@ -158,6 +158,11 @@ li:hover {
 	font-family: 'Syne';
 }
 
+.filters-container button:hover {
+	background-color: #1D6154;
+	color:#fefef8;
+}
+
 #contact {
 	width: 50%;
 margin: auto;

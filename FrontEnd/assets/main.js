@@ -1,6 +1,7 @@
 // Déclarations des variables
 
 const gallery = document.querySelector(".gallery");
+const filters = document.querySelector(".filters-container");
 
 
 // Récupération des travaux depuis le BackEnd
@@ -37,8 +38,7 @@ async function DisplayWorks(works) { // Cette fonction permet d'afficher dans la
 async function GetCategories() { // Cette fonction permet de récupérer les catégories (getCategories) grâce à une requête GET envoyée à l'API
     try {
         const response = await fetch("http://localhost:5678/api/categories");
-        const responseCategoriesJson = await response.json();
-        console.log(responseCategoriesJson);
+        return await response.json();
     } catch (error) {
         console.log(error);
     }
@@ -46,13 +46,21 @@ async function GetCategories() { // Cette fonction permet de récupérer les cat
 
 // Affichage des filtres récupérés
 
-
+async function DisplayCategories(categories) {
+    categories.forEach((category) => { // Pour chaque "category", la boucle éxécute le code suivant
+        const button = document.createElement("button");
+        button.textContent = category.name;
+        button.id = category.id;
+        filters.appendChild(button);
+    });
+}
 
 // Fonction init
 
 async function init() {
     const arrayWorks = await GetWorks(); // Cette variable permet de créer un tableau avec les travaux à afficher
+    const arrayCategories = await GetCategories(); // Cette variable permet de créer un tableau avec les catégories à afficher
     DisplayWorks(arrayWorks);
-    GetCategories();
+    DisplayCategories(arrayCategories);
 }
 init();

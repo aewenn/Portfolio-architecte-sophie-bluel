@@ -299,7 +299,8 @@ li:hover {
 }
 
 #contact p {
-	display: none;
+	color: red;
+	font-weight: 700;
 }
 
 input[type="submit"] {

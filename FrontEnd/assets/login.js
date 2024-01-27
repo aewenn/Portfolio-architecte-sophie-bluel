@@ -34,17 +34,19 @@ function init() {
         console.log(emailUser, passwordUser)
         console.log(!emailUser.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/)) 
         let isvalid = true;
-        if (emailUser === "" || !emailUser.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/)) { // Récupérer le message d'erreur + display block
+        if (emailUser !== "sophie.bluel@test.tld" || !emailUser.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/)) {
             isvalid = false;
+            document.getElementById("errormail").style.display = "block";
             console.log("email")
         } else {
-            // display none message d'erreur
+            document.getElementById("errormail").style.display = "none";
         }
-        if (passwordUser === "") { // Récupérer le message d'erreur + display block
+        if (passwordUser !== "S0phie") {
             isvalid = false;
+            document.getElementById("errorpassword").style.display = "block";
             console.log("password")
         } else {
-            // display none message d'erreur
+            document.getElementById("errorpassword").style.display = "none";
         }
         if (isvalid) {
             login();

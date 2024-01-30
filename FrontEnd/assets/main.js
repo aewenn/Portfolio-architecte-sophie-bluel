@@ -4,6 +4,8 @@
 
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters-container");
+const token = localStorage.getItem("token")
+console.log(token)
 
 
 // Récupération des travaux depuis le BackEnd

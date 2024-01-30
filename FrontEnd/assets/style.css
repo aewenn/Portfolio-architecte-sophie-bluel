@@ -301,6 +301,8 @@ li:hover {
 #contact p {
 	color: red;
 	font-weight: 700;
+	margin-top: 10px;
+	display: none;
 }
 
 input[type="submit"] {

@@ -6,6 +6,7 @@ const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters-container");
 const token = localStorage.getItem("token")
 console.log(token)
+const logout = document.querySelector(".logout")
 
 
 // Récupération des travaux depuis le BackEnd
@@ -86,6 +87,20 @@ async function FilteringWorks(AllWorks) { // Filtrage des travaux
         });
     });
 };
+
+
+// Mode admin - quand l'utilisateur est connecté
+
+if (token) { // Si la connexion a bien été établie et qu'on a récupéré le token
+    logout.textContent = "logout"; // Changement du texte "login" en "logout" dans la barre de navigation du header
+
+    // Déconnexion
+    logout.addEventListener("click",() => { // Lors du clic sur "logout"
+        localStorage.removeItem(token); // Le token est supprimé du local storage
+        window.location.href = "login.html" // Redirection sur la page de connexion
+    })
+}
+
 
 // Fonction init
 

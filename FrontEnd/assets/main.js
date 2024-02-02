@@ -114,5 +114,6 @@ async function init() {
     DisplayWorks(arrayWorks); // Appel de la fonction DisplayWorks
     DisplayCategories(arrayCategories); // Appel de la fonction DisplayCategories
     FilteringWorks(arrayWorks); // Appel de la fonction FilteringWorks
+    initModal();
 }
 init(); 

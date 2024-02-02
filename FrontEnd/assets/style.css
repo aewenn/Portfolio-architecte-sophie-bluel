@@ -142,6 +142,20 @@ body {
 	font-size: 14px;
 }
 
+/** edition mode **/
+.edition-mode {
+	width: 100%;
+	height: 59px;
+	background-color: black;
+	color: white;
+	border: none;
+	display: none;
+}
+
+.fa-pen-to-square {
+	padding-right: 10px;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -188,7 +202,7 @@ nav li {
 }
 
 li:hover {
-	color: #B1663C;
+	font-weight: bold;
 }
 
 #introduction {
@@ -218,9 +232,26 @@ li:hover {
 	margin-bottom: 0.5em;
 }
 
+#portfolio {
+	padding-top: 50px;
+}
+
+.modification {
+	display: flex;
+	justify-content: center;
+	gap: 40px;
+}
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+}
+
+#portfolio a {
+	padding-top: 8px;
+	text-decoration: none;
+	color: black;
+	display: none;
 }
 
 .gallery {
@@ -327,4 +358,55 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+/** Modale **/
+
+.modal-container {
+	display: flex;
+	position: fixed;
+	top: 0;
+	left: 0;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.30);
+}
+
+.modal {
+	position: relative;
+	width: 45%;
+	height: 85%;
+	background-color: white;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.fa-xmark {
+	position: absolute;
+	top: 26px;
+	right: 30px;
+	cursor: pointer;
+}
+
+.modal-container button {
+	background-color: #1d6154;
+	padding: 10px 20px;
+	border: 1px solid #1d6154;
+	border-radius: 25px;
+	color: #fefef8;
+	font-weight: 700;
+	font-family: 'Syne';
+}
+
+h3 {
+	color: #000;
+	font-family: "Work Sans";
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 400;
 }

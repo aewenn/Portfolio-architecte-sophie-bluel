@@ -7,6 +7,7 @@ const filters = document.querySelector(".filters-container");
 const token = localStorage.getItem("token")
 console.log(token)
 const logout = document.querySelector(".logout")
+const EditionMode = document.querySelector(".edition-mode")
 
 
 // Récupération des travaux depuis le BackEnd
@@ -93,9 +94,12 @@ async function FilteringWorks(AllWorks) { // Filtrage des travaux
 
 if (token) { // Si la connexion a bien été établie et qu'on a récupéré le token
     logout.textContent = "logout"; // Changement du texte "login" en "logout" dans la barre de navigation du header
+    document.querySelector(".edition-mode").style.display = "block"; // Apparition de la bannière "mode édition"
+    document.querySelector(".filters-container").style.display = "none"; // Disparition des filtres
+    document.querySelector(".modification a").style.display = "block"; // Apparition du lien "modifier"
 
     // Déconnexion
-    logout.addEventListener("click",() => { // Lors du clic sur "logout"
+    logout.addEventListener("click", () => { // Lors du clic sur "logout"
         localStorage.removeItem(token); // Le token est supprimé du local storage
         window.location.href = "login.html" // Redirection sur la page de connexion
     })

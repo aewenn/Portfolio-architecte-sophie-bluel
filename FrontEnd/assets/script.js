@@ -1,6 +1,6 @@
 // Page d'accueil
 
-// Déclarations des variables
+// Déclaration des variables
 
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters-container");
@@ -8,18 +8,6 @@ const token = localStorage.getItem("token")
 console.log(token)
 const logout = document.querySelector(".logout")
 const EditionMode = document.querySelector(".edition-mode")
-
-
-// Récupération des travaux depuis le BackEnd
-
-async function GetWorks() { // Récupération des travaux grâce à une requête GET envoyée à l'API
-    try {
-        const response = await fetch("http://localhost:5678/api/works");
-        return await response.json(); // L'instruction "return" = met fin à l'éxécution de la fonction et définit la valeur à renvoyer 
-    } catch (error) {
-        console.log(error)
-    }
-}
 
 
 // Affichage des travaux récupérés
@@ -90,30 +78,31 @@ async function FilteringWorks(AllWorks) { // Filtrage des travaux
 };
 
 
-// Mode admin - quand l'utilisateur est connecté
 
-if (token) { // Si la connexion a bien été établie et qu'on a récupéré le token
-    logout.textContent = "logout"; // Changement du texte "login" en "logout" dans la barre de navigation du header
-    document.querySelector(".edition-mode").style.display = "block"; // Apparition de la bannière "mode édition"
-    document.querySelector(".filters-container").style.display = "none"; // Disparition des filtres
-    document.querySelector(".modification a").style.display = "block"; // Apparition du lien "modifier"
-
-    // Déconnexion
-    logout.addEventListener("click", () => { // Lors du clic sur "logout"
-        localStorage.removeItem(token); // Le token est supprimé du local storage
-        window.location.href = "login.html" // Redirection sur la page de connexion
-    })
-}
 
 
 // Fonction init
 
 async function init() {
+        // Mode admin - quand l'utilisateur est connecté
+    if (token) { // Si la connexion a bien été établie et qu'on a récupéré le token
+        logout.textContent = "logout"; // Changement du texte "login" en "logout" dans la barre de navigation du header
+        document.querySelector(".edition-mode").style.display = "block"; // Apparition de la bannière "mode édition"
+        document.querySelector(".filters-container").style.display = "none"; // Disparition des filtres
+        document.querySelector(".modification a").style.display = "block"; // Apparition du lien "modifier"
+
+        // Déconnexion
+        logout.addEventListener("click", () => { // Lors du clic sur "logout"
+            localStorage.removeItem("token"); // Le token est supprimé du local storage
+            window.location.href = "login.html" // Redirection sur la page de connexion
+        })
+    }
     const arrayWorks = await GetWorks(); // Création d'un tableau avec les travaux à afficher
     const arrayCategories = await GetCategories(); // Création d'un tableau avec les catégories à afficher
     DisplayWorks(arrayWorks); // Appel de la fonction DisplayWorks
     DisplayCategories(arrayCategories); // Appel de la fonction DisplayCategories
     FilteringWorks(arrayWorks); // Appel de la fonction FilteringWorks
     initModal();
+
 }
 init(); 

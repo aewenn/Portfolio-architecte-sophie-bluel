@@ -27,11 +27,11 @@ function CloseModal() { // Fermeture de la modale
 };
 
 
-// Affichage de la galerie dans la modale
+// Affichage de la galerie dans la première page de la modale
 
 function DisplayGalleryModal() {
     GetWorks();
-};
+}
 
 
 // Fonction initModal

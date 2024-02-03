@@ -152,6 +152,8 @@ body {
 	text-align: center;
 	padding-top: 25px;
 	padding-bottom: 25px;
+	font-size: 16px;
+	font-weight: 400;
 }
 
 .fa-pen-to-square {
@@ -271,7 +273,6 @@ nav a {
 
 .gallery img {
 	width: 100%;
-
 }
 
 /** filters **/
@@ -286,12 +287,14 @@ nav a {
 
 .filters-container button {
 	background-color: #fefef8;
-	padding: 10px 20px;
+	padding: 9px 20px;
 	border: 1px solid #1d6154;
 	border-radius: 25px;
 	color: #1d6154;
 	font-weight: 700;
 	font-family: 'Syne';
+	font-size: 16px;
+
 }
 
 .filters-container button:active {
@@ -355,6 +358,10 @@ input[type="submit"] {
 	cursor: pointer;
 }
 
+input[type="submit"]:active {
+	background-color: #0E2F28;
+}
+
 .password {
 	font-weight: 700;
 	color: black;
@@ -384,8 +391,8 @@ footer nav ul {
 
 .modal {
 	position: relative;
-	width: 45%;
-	height: 85%;
+	width: 35%;
+	height: 72%;
 	background-color: white;
 	border-radius: 10px;
 	display: flex;
@@ -394,14 +401,43 @@ footer nav ul {
 	align-items: center;
 }
 
+.modal-2 {
+	position: relative;
+	width: 35%;
+	height: 72%;
+	background-color: white;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	display: none;
+}
+
 .fa-xmark {
 	position: absolute;
 	top: 26px;
 	right: 30px;
 	cursor: pointer;
+	font-size: 24px;
 }
 
-.modal-container button {
+.fa-arrow-left {
+	position: absolute;
+	top: 26px;
+	left: 30px;
+	cursor: pointer;
+	font-size: 21px;
+}
+
+.container-button {
+	border-top: 1px solid #B3B3B3;
+	width: 420px;
+	display: flex;
+	justify-content: center;
+}
+
+.container-button button {
 	background-color: #1d6154;
 	padding: 10px 20px;
 	border: 1px solid #1d6154;
@@ -409,6 +445,7 @@ footer nav ul {
 	color: #fefef8;
 	font-weight: 700;
 	font-family: 'Syne';
+	margin-top: 40px;
 }
 
 h3 {

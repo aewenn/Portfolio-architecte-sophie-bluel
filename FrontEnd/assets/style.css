@@ -397,7 +397,7 @@ footer nav ul {
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 }
 
@@ -412,6 +412,45 @@ footer nav ul {
 	justify-content: space-around;
 	align-items: center;
 	display: none;
+}
+
+.container-gallery {
+	width: 80%;
+	padding-left: 12%;
+}
+
+.modal-gallery {
+	width: 100%;
+	height: 50%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.modal-gallery img {
+	height: 104px;
+
+}
+
+.modal-gallery figure {
+	position: relative;
+}
+
+.modal-gallery span {
+	position: absolute;
+	top: 5px;
+	right: 6px;
+	background-color: black;
+	width: 17px;
+	height: 17px;
+	border-radius: 3px 3px 3px 3px;
+}
+
+
+.fa-trash-can {
+	color: white;
+	font-size: 10px;
+	padding-left: 4px;
 }
 
 .fa-xmark {

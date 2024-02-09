@@ -16,6 +16,7 @@ const inputTitle = document.getElementById("title")
 const selectCategory = document.getElementById("category")
 const errorTitle = document.querySelector(".error-title")
 const errorSelect = document.querySelector(".error-select")
+const formAddPhoto = document.getElementById("form-addphoto")
 
 
 // Affichage dynamique de la modale
@@ -107,7 +108,8 @@ async function DeleteWork() {
 // Ajout d'un projet
 
 function AddWorks() {
-    buttonSubmitPhoto.addEventListener("submit", () => {
+    buttonSubmitPhoto.addEventListener("submit", (e) => {
+        e.preventDefault();
     })
 }
 
@@ -122,13 +124,12 @@ function ControlFormAddProjet() {
             errorTitle.style.display = "none";
         }
         if (selectCategory.value === "0") {
-            errorSelect.style.display = "flex"; // Un message d'erreur s'affiche si aucune option n'a été sélectionnée
+            errorSelect.style.display = "flex"; // Un message d'erreur s'affiche si l'option 0 a été sélectionnée
         } else {
             errorSelect.style.display = "none";
         }
     })
 }
-
 
 
 // Fonction initModal

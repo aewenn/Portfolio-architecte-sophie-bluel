@@ -534,6 +534,12 @@ footer nav ul {
 	border: none;
 }
 
+.title-category p {
+	color:red;
+	font-weight: bold;
+	display: none;
+}
+
 .title-category select {
 	background: #FFF;
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);

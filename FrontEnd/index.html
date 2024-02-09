@@ -108,17 +108,20 @@
 				</div>
 				<div class="title-category">
 					<label for="title">Titre</label>
-					<input type="text" name="title" id="" required="">
+					<input type="text" name="title" id="title" required="">
+					<p class="error-title">Erreur : Le champ de saisie est vide.</p>
 					<label for="categorySelect">Catégorie</label>
-					<select name="category" id="" required="">
+					<select name="category" id="category" required="">
+						<option value="0"></option>
 						<option value="1">Objets</option>
 						<option value="2">Appartements</option>
 						<option value="3">Hôtels & restaurants</option>
 					</select>
+					<p class="error-select">Erreur : Aucune option n'a été sélectionnée.</p>
 				</div>
 			</form>
 			<div class="container-button">
-				<button>Valider</button>
+				<button class="btnSubmitPhoto">Valider</button>
 			</div>
 		</div>
 	</div>

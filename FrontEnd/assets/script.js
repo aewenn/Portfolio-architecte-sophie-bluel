@@ -63,7 +63,7 @@ async function FilteringWorks(AllWorks) { // Filtrage des travaux
             buttonId = e.target.id; // Ecoute de l'ID des boutons
             console.log(buttonId);
             gallery.innerHTML = ""; // Suppression de l'affichage des travaux au clic
-            if (buttonId !== "") { // Si l'ID des boutons est différent de "0", le code suivant s'éxécute :
+            if (buttonId !== "") { // Si l'ID des boutons est différent de "", le code suivant s'éxécute :
                 const WorksByCategory = AllWorks.filter((work) => { // Filtrage de tous les travaux
                     return work.categoryId == buttonId; // Récupération des travaux qui ont un ID égal à l'ID du bouton
                 });

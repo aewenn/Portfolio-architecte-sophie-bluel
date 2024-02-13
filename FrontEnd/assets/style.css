@@ -478,6 +478,7 @@ footer nav ul {
 	align-items: center;
 	height: 150px;
 	margin-top: 30px;
+	position: relative;
 }
 
 .addPhoto-container p {
@@ -499,6 +500,12 @@ footer nav ul {
 	font-weight: 500;
 	cursor: pointer;
 	margin-top: 10px;
+}
+
+.addPhoto-file2 {
+	cursor: pointer;
+	z-index: 1;
+	opacity: 0;
 }
 
 #file {
@@ -580,4 +587,10 @@ h3 {
 	font-style: normal;
 	font-weight: 400;
 	padding-top: 60px;
+}
+
+#image {
+	height: 100%;
+	position: absolute;
+	display: none;
 }

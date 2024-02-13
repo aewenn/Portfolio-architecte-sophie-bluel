@@ -12,12 +12,16 @@ const modal2ndpage = document.querySelector(".modal-2"); // Récupération de la
 const buttonAddPhoto = document.querySelector(".btnAddPhoto"); // Récupération du bouton "Ajouter une photo"
 const backto1stpage = document.querySelector(".fa-arrow-left"); // Récupération de la flèche gauche
 const buttonSubmitPhoto = document.querySelector(".btnSubmitPhoto") // Récupération du bouton "valider"
-const inputTitle = document.getElementById("title")
-const selectCategory = document.getElementById("category")
-const errorTitle = document.querySelector(".error-title")
-const errorSelect = document.querySelector(".error-select")
-const formAddPhoto = document.getElementById("form-addphoto")
-
+const inputTitle = document.getElementById("title") // Récupération de l'input "titre"
+const selectCategory = document.getElementById("category") // Récupération du select "catégories"
+const errorTitle = document.querySelector(".error-title") // Récupération du message d'erreur si titre vide
+const errorSelect = document.querySelector(".error-select") // Récupération du message d'erreur si l'option 0 est sélectionnée
+const formAddPhoto = document.getElementById("form-addphoto") // Récupération du formulaire
+const inputFile = document.getElementById("file")
+const prewiewImg = document.getElementById("image")
+const label = document.querySelector(".addPhoto-file")
+const previewTextImg = document.querySelector(".addPhoto-container p")
+console.log(formAddPhoto)
 
 // Affichage dynamique de la modale
 
@@ -81,52 +85,84 @@ function OpenGalleryModal() {
 
 // Suppression d'un projet
 
-async function DeleteWork() {
-    await DisplayGalleryModal(); // Il faut d'abord gérer l'affichage des icônes
+function DeleteWork() {
     const Alltrashcan = document.querySelectorAll(".fa-trash-can"); // On récupère toutes les icônes
     Alltrashcan.forEach(trashcan => { // Pour chaque icône
-        trashcan.addEventListener("click", () => { // évènement au clic
+        trashcan.addEventListener("click", (e) => { // évènement au clic
+            e.preventDefault();
             const WorkId = trashcan.id; // L'id de chaque projet correspond à l'id de chaque îcone
             fetch("http://localhost:5678/api/works/" + WorkId, {
                 method: "DELETE",
                 headers: {
                     "Content-type": "application/json",
                     Authorization: "Bearer " + localStorage.getItem("token"),
-                }
+                },
             })
-                .then(response => {
-                    if (!response.ok) {
-                        console.log("La suppression n'a pas abouti.")
-                    }
-                    return response.json();
-                })
         })
     })
 }
 
 
+// Prévisualisation de l'image lors de l'ajout de projet
+
+function PreviewNewWork() {
+    inputFile.addEventListener("change", () => { // Evènement permettant de changer l'aperçu
+        const fileImg = inputFile.files[0]; 
+        console.log(fileImg)
+        if (fileImg) { // Si un fichier est sélectionné
+            const reader = new FileReader(); // FileReader permet de lire le contenu d'un fichier de façon asynchrone
+            reader.onload = function (e) { // Evènement déclenché lorsque la lecture est complète
+                prewiewImg.src = e.target.result; // On change l'image
+                prewiewImg.style.display = "block"; // L'image apparaît dans l'aperçu
+                label.classList.add("addPhoto-file2"); // On ajoute une classe permettant de cacher l'input pour ajouter une photo
+                previewTextImg.innerHTML = ""; // On cache le texte précisant le type d'image et la taille max
+            };
+            reader.readAsDataURL(fileImg) // On lit le fichier uploadé
+        } else {
+            prewiewImg.style.display = "none"; // Sinon, l'image n'apparaît pas
+        }
+    })
+} 
+
+
 // Ajout d'un projet
 
 function AddWorks() {
-    buttonSubmitPhoto.addEventListener("submit", (e) => {
-        e.preventDefault();
+    console.log(inputFile.files[0])
+    const formData = new FormData();
+    formData.append("title", inputTitle.value)
+    formData.append("image", inputFile.files[0])
+    formData.append("category", selectCategory.value)
+
+    fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        body: formData,
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+        },
     })
 }
-
 
 // Contrôles des champs du formulaire lors de l'ajout de projet
 
 function ControlFormAddProjet() {
-    buttonSubmitPhoto.addEventListener("click", () => {
+    formAddPhoto.addEventListener("submit", (e) => { // évènement sur le bouton "valider"
+        e.preventDefault();
+        let isvalid = true;
         if (inputTitle.value === "") {
             errorTitle.style.display = "flex"; // Un message d'erreur s'affiche si le champ "Titre" est vide
+            isvalid = false;
         } else {
-            errorTitle.style.display = "none";
+            errorTitle.style.display = "none"; // Sinon, pas de message d'erreur
         }
         if (selectCategory.value === "0") {
             errorSelect.style.display = "flex"; // Un message d'erreur s'affiche si l'option 0 a été sélectionnée
+            isvalid = false;
         } else {
-            errorSelect.style.display = "none";
+            errorSelect.style.display = "none"; // Sinon, pas de message d'erreur
+        }
+        if (isvalid) {
+            AddWorks();
         }
     })
 }
@@ -134,14 +170,15 @@ function ControlFormAddProjet() {
 
 // Fonction initModal
 
-function initModal() {
+async function initModal() {
     OpenModal();
     CloseModal();
     buttonAddPhoto.addEventListener("click", () => { // Au clic sur le bouton "Ajouter une photo"
         OpenAddProjetFormModal(); // La fonction "OpenAddProjetFormModal" s'éxécute
     });
     OpenGalleryModal();
+    await DisplayGalleryModal(); // Il faut d'abord gérer l'affichage des icônes
     DeleteWork();
-    AddWorks();
     ControlFormAddProjet();
+    PreviewNewWork();
 };

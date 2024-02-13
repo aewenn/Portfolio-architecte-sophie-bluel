@@ -105,6 +105,7 @@
 					</label>
 					<p>jpg, png : 4mo max</p>
 					<input type="file" name="image" id="file" accept="image.jpg, image/png" required="">
+					<img src="#" alt="" id="image">
 				</div>
 				<div class="title-category">
 					<label for="title">Titre</label>
@@ -119,10 +120,11 @@
 					</select>
 					<p class="error-select">Erreur : Aucune option n'a été sélectionnée.</p>
 				</div>
+				<div class="container-button">
+					<button type="submit" class="btnSubmitPhoto">Valider</button>
+				</div>
 			</form>
-			<div class="container-button">
-				<button class="btnSubmitPhoto">Valider</button>
-			</div>
+
 		</div>
 	</div>
 	<script src="./assets/helpers.js" defer></script>

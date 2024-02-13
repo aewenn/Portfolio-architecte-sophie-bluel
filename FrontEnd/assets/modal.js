@@ -35,12 +35,24 @@ function CloseModal() { // Fermeture de la modale
     xmark.addEventListener("click", () => { // Au clic sur la croix, la 1ère page de la modale disparaît
         modalContainer.style.display = "none";
     })
-    xmark2.addEventListener("click", () => { // Au clic sur la croix, la 2ème page de la modale disparaît
+    xmark2.addEventListener("click", () => { // Au clic sur la croix, la 2ème page de la modale disparaît, et reset sur le formulaire
         modalContainer.style.display = "none";
+        inputFile.value = "";
+        prewiewImg.style.display = "none";
+        label.classList.remove("addPhoto-file2")
+        previewTextImg.innerHTML = "jpg, png : 4mo max"
+        inputTitle.value = "";
+        selectCategory.value = "0"
     })
-    modalContainer.addEventListener("click", (e) => { // Au clic en dehors de la modale, la modale disparaît 
+    modalContainer.addEventListener("click", (e) => { // Au clic en dehors de la modale, la modale disparaît, et reset sur le formulaire
         if (e.target.className === "modal-container") {
             modalContainer.style.display = "none";
+            inputFile.value = "";
+            prewiewImg.style.display = "none";
+            label.classList.remove("addPhoto-file2")
+            previewTextImg.innerHTML = "jpg, png : 4mo max"
+            inputTitle.value = "";
+            selectCategory.value = "0"
         }
     })
 };
@@ -79,6 +91,12 @@ function OpenGalleryModal() {
     backto1stpage.addEventListener("click", () => { // Au clic sur la flèche 
         modal2ndpage.style.display = "none"; // Disparition de la deuxième page de la modale
         modal1stpage.style.display = "flex"; // Apparition de la première page de la modale
+        inputFile.value = ""; // Reset sur le formulaire de la deuxième page de la modale
+        prewiewImg.style.display = "none";
+        label.classList.remove("addPhoto-file2")
+        previewTextImg.innerHTML = "jpg, png : 4mo max"
+        inputTitle.value = "";
+        selectCategory.value = "0"
     });
 }
 

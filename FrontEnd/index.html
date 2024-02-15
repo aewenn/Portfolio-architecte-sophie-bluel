@@ -49,7 +49,7 @@
 		<section id="portfolio">
 			<div class="modification">
 				<h2>Mes Projets</h2>
-				<a href="#"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
+				<p><i class="fa-regular fa-pen-to-square"></i>modifier</p>
 			</div>
 			<div class="filters-container">
 				<button>Tous</button>
@@ -96,7 +96,7 @@
 		<div class="modal-2">
 			<i class="fa-solid fa-arrow-left"></i>
 			<i class="fa-solid fa-xmark"></i>
-			<h3>Ajout photo</h3>
+			<h4>Ajout photo</h4>
 			<form id="form-addphoto">
 				<div class="addPhoto-container">
 					<i class="fa-regular fa-image"></i>
@@ -110,7 +110,6 @@
 				<div class="title-category">
 					<label for="title">Titre</label>
 					<input type="text" name="title" id="title" required="">
-					<p class="error-title">Erreur : Le champ de saisie est vide.</p>
 					<label for="categorySelect">Catégorie</label>
 					<select name="category" id="category" required="">
 						<option value="0"></option>
@@ -118,7 +117,7 @@
 						<option value="2">Appartements</option>
 						<option value="3">Hôtels & restaurants</option>
 					</select>
-					<p class="error-select">Erreur : Aucune option n'a été sélectionnée.</p>
+					<p id="error-select">Erreur : Aucune option n'a été sélectionnée.</p>
 				</div>
 				<div class="container-button">
 					<button type="submit" class="btnSubmitPhoto">Valider</button>

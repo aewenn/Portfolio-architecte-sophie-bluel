@@ -14,6 +14,7 @@ const EditionMode = document.querySelector(".edition-mode")
 
 async function DisplayWorks(works) { // Affichage dans la galerie de tous les travaux récupérés depuis le BackEnd
     console.log(works);
+    gallery.innerHTML = ""
     works.forEach((work) => { // Pour chaque "work" ...
         CreateAWork(work); // La fonction "CreateAWork" est appelée
     });
@@ -78,9 +79,6 @@ async function FilteringWorks(AllWorks) { // Filtrage des travaux
 };
 
 
-
-
-
 // Fonction init
 
 async function init() {
@@ -89,7 +87,7 @@ async function init() {
         logout.textContent = "logout"; // Changement du texte "login" en "logout" dans la barre de navigation du header
         document.querySelector(".edition-mode").style.display = "block"; // Apparition de la bannière "mode édition"
         document.querySelector(".filters-container").style.display = "none"; // Disparition des filtres
-        document.querySelector(".modification a").style.display = "block"; // Apparition du lien "modifier"
+        document.querySelector(".modification p").style.display = "block"; // Apparition du lien "modifier"
 
         // Déconnexion
         logout.addEventListener("click", () => { // Lors du clic sur "logout"
@@ -103,6 +101,5 @@ async function init() {
     DisplayCategories(arrayCategories); // Appel de la fonction DisplayCategories
     FilteringWorks(arrayWorks); // Appel de la fonction FilteringWorks
     initModal();
-
 }
 init(); 

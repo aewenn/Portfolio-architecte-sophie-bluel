@@ -2,7 +2,7 @@
 
 // Déclaration des variables 
 
-const modify = document.querySelector(".modification a"); // Récupération du lien "modifier"
+const modify = document.querySelector(".modification p"); // Récupération du lien "modifier"
 const modalContainer = document.querySelector(".modal-container"); // Récupération du conteneur de la modale
 const xmark = document.querySelector(".modal-container .fa-xmark"); // Récupération de la croix page 1
 const xmark2 = document.querySelector(".modal-2 .fa-xmark"); // Récupération de la croix page 2
@@ -14,13 +14,11 @@ const backto1stpage = document.querySelector(".fa-arrow-left"); // Récupératio
 const buttonSubmitPhoto = document.querySelector(".btnSubmitPhoto") // Récupération du bouton "valider"
 const inputTitle = document.getElementById("title") // Récupération de l'input "titre"
 const selectCategory = document.getElementById("category") // Récupération du select "catégories"
-const errorTitle = document.querySelector(".error-title") // Récupération du message d'erreur si titre vide
-const errorSelect = document.querySelector(".error-select") // Récupération du message d'erreur si l'option 0 est sélectionnée
 const formAddPhoto = document.getElementById("form-addphoto") // Récupération du formulaire
-const inputFile = document.getElementById("file")
-const prewiewImg = document.getElementById("image")
-const label = document.querySelector(".addPhoto-file")
-const previewTextImg = document.querySelector(".addPhoto-container p")
+const inputFile = document.getElementById("file") // Récupération de l'input permettant d'ajouter un fichier
+const prewiewImg = document.getElementById("image") // Récupération de l'image de prévisualisation
+const label = document.querySelector(".addPhoto-file") // Récupération du label "Ajouter photo"
+const previewTextImg = document.querySelector(".addPhoto-container p") // Récupération du texte précisant le type d'image et la taille
 console.log(formAddPhoto)
 
 // Affichage dynamique de la modale
@@ -37,22 +35,18 @@ function CloseModal() { // Fermeture de la modale
     })
     xmark2.addEventListener("click", () => { // Au clic sur la croix, la 2ème page de la modale disparaît, et reset sur le formulaire
         modalContainer.style.display = "none";
-        inputFile.value = "";
         prewiewImg.style.display = "none";
         label.classList.remove("addPhoto-file2")
         previewTextImg.innerHTML = "jpg, png : 4mo max"
-        inputTitle.value = "";
-        selectCategory.value = "0"
+        formAddPhoto.reset(); // reset du formulaire page 2 
     })
     modalContainer.addEventListener("click", (e) => { // Au clic en dehors de la modale, la modale disparaît, et reset sur le formulaire
         if (e.target.className === "modal-container") {
             modalContainer.style.display = "none";
-            inputFile.value = "";
             prewiewImg.style.display = "none";
             label.classList.remove("addPhoto-file2")
             previewTextImg.innerHTML = "jpg, png : 4mo max"
-            inputTitle.value = "";
-            selectCategory.value = "0"
+            formAddPhoto.reset(); // reset du formulaire page 2 
         }
     })
 };
@@ -61,6 +55,7 @@ function CloseModal() { // Fermeture de la modale
 // Affichage de la galerie dans la première page de la modale
 
 async function DisplayGalleryModal() { // Fonction d'affichage des travaux
+    modalGallery.innerHTML = ""
     const works = await GetWorks() // On récupère les travaux
     works.forEach((work) => { // Pour chaque projet contenu dans le tableau de travaux
         const figure = document.createElement("figure"); // Création de l'élément HTML "figure"
@@ -83,6 +78,8 @@ async function DisplayGalleryModal() { // Fonction d'affichage des travaux
 function OpenAddProjetFormModal() {
     modal1stpage.style.display = "none"; // Disparation de la première page de la modale
     modal2ndpage.style.display = "flex"; // Apparition de la deuxième page de la modale
+    label.classList.remove("addPhoto-file2")
+    previewTextImg.innerHTML = "jpg, png : 4mo max"
 }
 
 // Retour sur la première page de la modale au clic sur la flèche 
@@ -91,19 +88,17 @@ function OpenGalleryModal() {
     backto1stpage.addEventListener("click", () => { // Au clic sur la flèche 
         modal2ndpage.style.display = "none"; // Disparition de la deuxième page de la modale
         modal1stpage.style.display = "flex"; // Apparition de la première page de la modale
-        inputFile.value = ""; // Reset sur le formulaire de la deuxième page de la modale
         prewiewImg.style.display = "none";
         label.classList.remove("addPhoto-file2")
         previewTextImg.innerHTML = "jpg, png : 4mo max"
-        inputTitle.value = "";
-        selectCategory.value = "0"
+        formAddPhoto.reset(); // reset du formulaire page 2 
     });
 }
 
 
 // Suppression d'un projet
 
-function DeleteWork() {
+async function DeleteWork() {
     const Alltrashcan = document.querySelectorAll(".fa-trash-can"); // On récupère toutes les icônes
     Alltrashcan.forEach(trashcan => { // Pour chaque icône
         trashcan.addEventListener("click", (e) => { // évènement au clic
@@ -115,6 +110,8 @@ function DeleteWork() {
                     "Content-type": "application/json",
                     Authorization: "Bearer " + localStorage.getItem("token"),
                 },
+            }).then(() => {
+                DisplayGalleryModal();
             })
         })
     })
@@ -125,7 +122,7 @@ function DeleteWork() {
 
 function PreviewNewWork() {
     inputFile.addEventListener("change", () => { // Evènement permettant de changer l'aperçu
-        const fileImg = inputFile.files[0]; 
+        const fileImg = inputFile.files[0];
         console.log(fileImg)
         if (fileImg) { // Si un fichier est sélectionné
             const reader = new FileReader(); // FileReader permet de lire le contenu d'un fichier de façon asynchrone
@@ -140,7 +137,7 @@ function PreviewNewWork() {
             prewiewImg.style.display = "none"; // Sinon, l'image n'apparaît pas
         }
     })
-} 
+}
 
 
 // Ajout d'un projet
@@ -158,6 +155,18 @@ function AddWorks() {
         headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
         },
+    }).then((response) => {
+        if (!response.ok) {
+            throw new Error("Erreur lors de l'ajout de fichier.")
+        }
+        return response.json()
+    }).then(() => {
+        formAddPhoto.reset()
+        prewiewImg.style.display = "none";
+        modal2ndpage.style.display = "none";
+        modal1stpage.style.display = "flex";
+    }).then(() => {
+        DisplayGalleryModal();
     })
 }
 
@@ -167,17 +176,15 @@ function ControlFormAddProjet() {
     formAddPhoto.addEventListener("submit", (e) => { // évènement sur le bouton "valider"
         e.preventDefault();
         let isvalid = true;
-        if (inputTitle.value === "") {
-            errorTitle.style.display = "flex"; // Un message d'erreur s'affiche si le champ "Titre" est vide
+        if (prewiewImg.value === "") {
             isvalid = false;
-        } else {
-            errorTitle.style.display = "none"; // Sinon, pas de message d'erreur
+        }
+        if (inputTitle.value === "") {
+            isvalid = false;
         }
         if (selectCategory.value === "0") {
-            errorSelect.style.display = "flex"; // Un message d'erreur s'affiche si l'option 0 a été sélectionnée
             isvalid = false;
-        } else {
-            errorSelect.style.display = "none"; // Sinon, pas de message d'erreur
+            document.getElementById("error-select").style.display = "flex";
         }
         if (isvalid) {
             AddWorks();
@@ -195,7 +202,7 @@ async function initModal() {
         OpenAddProjetFormModal(); // La fonction "OpenAddProjetFormModal" s'éxécute
     });
     OpenGalleryModal();
-    await DisplayGalleryModal(); // Il faut d'abord gérer l'affichage des icônes
+    await DisplayGalleryModal(); // Il faut d'abord gérer l'affichage des projets
     DeleteWork();
     ControlFormAddProjet();
     PreviewNewWork();

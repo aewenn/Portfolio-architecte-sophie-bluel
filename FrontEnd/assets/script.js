@@ -2,18 +2,16 @@
 
 // Déclaration des variables
 
-const gallery = document.querySelector(".gallery");
-const filters = document.querySelector(".filters-container");
-const token = localStorage.getItem("token")
-console.log(token)
-const logout = document.querySelector(".logout")
-const EditionMode = document.querySelector(".edition-mode")
+const gallery = document.querySelector(".gallery"); // Récupération de la galerie
+const filters = document.querySelector(".filters-container"); // Récupération des filtres
+const token = localStorage.getItem("token") // Récupération du token
+const logout = document.querySelector(".logout") // Récupération du texte "login" pour le changer en "logout" au mode édition
+const EditionMode = document.querySelector(".edition-mode") // Récupération du mode édition pour gérer son affichage
 
 
 // Affichage des travaux récupérés
 
 async function DisplayWorks(works) { // Affichage dans la galerie de tous les travaux récupérés depuis le BackEnd
-    console.log(works);
     gallery.innerHTML = ""
     works.forEach((work) => { // Pour chaque "work" ...
         CreateAWork(work); // La fonction "CreateAWork" est appelée
@@ -61,7 +59,7 @@ async function FilteringWorks(AllWorks) { // Filtrage des travaux
     const buttons = document.querySelectorAll(".filters-container button"); // Récupération de tous les filtres
     buttons.forEach(button => { // Pour chaque bouton ...
         button.addEventListener("click", (e) => { // Au clic, on écoute l'évènement suivant :
-            buttonId = e.target.id; // Ecoute de l'ID des boutons
+            const buttonId = e.target.id; // Ecoute de l'ID des boutons
             console.log(buttonId);
             gallery.innerHTML = ""; // Suppression de l'affichage des travaux au clic
             if (buttonId !== "") { // Si l'ID des boutons est différent de "", le code suivant s'éxécute :

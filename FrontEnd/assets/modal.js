@@ -2,6 +2,8 @@
 
 // Déclaration des variables 
 
+// Variables pour l'affichage de la modale
+
 const modify = document.querySelector(".modification p"); // Récupération du lien "modifier"
 const modalContainer = document.querySelector(".modal-container"); // Récupération du conteneur de la modale
 const xmark = document.querySelector(".modal-container .fa-xmark"); // Récupération de la croix page 1
@@ -11,6 +13,9 @@ const modal1stpage = document.querySelector(".modal"); // Récupération de la p
 const modal2ndpage = document.querySelector(".modal-2"); // Récupération de la deuxième page de la modale
 const buttonAddPhoto = document.querySelector(".btnAddPhoto"); // Récupération du bouton "Ajouter une photo"
 const backto1stpage = document.querySelector(".fa-arrow-left"); // Récupération de la flèche gauche
+
+// Variables pour le formulaire page 2 de la modale
+
 const buttonSubmitPhoto = document.querySelector(".btnSubmitPhoto") // Récupération du bouton "valider"
 const inputTitle = document.getElementById("title") // Récupération de l'input "titre"
 const selectCategory = document.getElementById("category") // Récupération du select "catégories"
@@ -19,7 +24,7 @@ const inputFile = document.getElementById("file") // Récupération de l'input p
 const prewiewImg = document.getElementById("image") // Récupération de l'image de prévisualisation
 const label = document.querySelector(".addPhoto-file") // Récupération du label "Ajouter photo"
 const previewTextImg = document.querySelector(".addPhoto-container p") // Récupération du texte précisant le type d'image et la taille
-console.log(formAddPhoto)
+
 
 // Affichage dynamique de la modale
 
@@ -38,7 +43,8 @@ function CloseModal() { // Fermeture de la modale
         prewiewImg.style.display = "none";
         label.classList.remove("addPhoto-file2")
         previewTextImg.innerHTML = "jpg, png : 4mo max"
-        formAddPhoto.reset(); // reset du formulaire page 2 
+        formAddPhoto.reset(); // reset du formulaire page 2
+        document.getElementById("error-select").style.display = "none";
     })
     modalContainer.addEventListener("click", (e) => { // Au clic en dehors de la modale, la modale disparaît, et reset sur le formulaire
         if (e.target.className === "modal-container") {
@@ -47,6 +53,7 @@ function CloseModal() { // Fermeture de la modale
             label.classList.remove("addPhoto-file2")
             previewTextImg.innerHTML = "jpg, png : 4mo max"
             formAddPhoto.reset(); // reset du formulaire page 2 
+            document.getElementById("error-select").style.display = "none";
         }
     })
 };
@@ -92,6 +99,7 @@ function OpenGalleryModal() {
         label.classList.remove("addPhoto-file2")
         previewTextImg.innerHTML = "jpg, png : 4mo max"
         formAddPhoto.reset(); // reset du formulaire page 2 
+        document.getElementById("error-select").style.display = "none";
     });
 }
 

@@ -12,6 +12,7 @@ const EditionMode = document.querySelector(".edition-mode") // Récupération du
 // Affichage des travaux récupérés
 
 async function DisplayWorks(works) { // Affichage dans la galerie de tous les travaux récupérés depuis le BackEnd
+    works = await GetWorks()
     gallery.innerHTML = ""
     works.forEach((work) => { // Pour chaque "work" ...
         CreateAWork(work); // La fonction "CreateAWork" est appelée

@@ -120,6 +120,7 @@ async function DeleteWork() {
                 },
             }).then(() => {
                 DisplayGalleryModal();
+                DisplayWorks();
             })
         })
     })
@@ -175,6 +176,7 @@ function AddWorks() {
         modal1stpage.style.display = "flex";
     }).then(() => {
         DisplayGalleryModal();
+        DisplayWorks();
     })
 }
 
@@ -199,7 +201,6 @@ function ControlFormAddProjet() {
         }
     })
 }
-
 
 // Fonction initModal
 

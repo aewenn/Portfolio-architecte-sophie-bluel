@@ -71,6 +71,10 @@ async function DisplayGalleryModal() { // Fonction d'affichage des travaux
         const span = document.createElement("span"); // Création du fond noir
         trashcan.classList.add("fa-solid", "fa-trash-can"); // Ajout des classes à l'icône poubelle
         trashcan.id = work.id; // L'id de l'icône correspond à l'id du projet
+        trashcan.addEventListener("click", (e) => { // évènement au clic
+            e.preventDefault();
+            DeleteWork(work.id); // Appel de la fonction DeleteWork
+        })
         img.src = work.imageUrl;
         figure.appendChild(img);
         figure.appendChild(span);
@@ -89,6 +93,7 @@ function OpenAddProjetFormModal() {
     previewTextImg.innerHTML = "jpg, png : 4mo max"
 }
 
+
 // Retour sur la première page de la modale au clic sur la flèche 
 
 function OpenGalleryModal() {
@@ -106,23 +111,17 @@ function OpenGalleryModal() {
 
 // Suppression d'un projet
 
-async function DeleteWork() {
-    const Alltrashcan = document.querySelectorAll(".fa-trash-can"); // On récupère toutes les icônes
-    Alltrashcan.forEach(trashcan => { // Pour chaque icône
-        trashcan.addEventListener("click", (e) => { // évènement au clic
-            e.preventDefault();
-            const WorkId = trashcan.id; // L'id de chaque projet correspond à l'id de chaque îcone
-            fetch("http://localhost:5678/api/works/" + WorkId, {
-                method: "DELETE",
-                headers: {
-                    "Content-type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
-                },
-            }).then(() => {
-                DisplayGalleryModal();
-                DisplayWorks();
-            })
-        })
+async function DeleteWork(WorkId) {
+    console.log("clic")
+    fetch("http://localhost:5678/api/works/" + WorkId, {
+        method: "DELETE",
+        headers: {
+            "Content-type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+    }).then(() => {
+        DisplayGalleryModal();
+        DisplayWorks();
     })
 }
 
@@ -212,7 +211,6 @@ async function initModal() {
     });
     OpenGalleryModal();
     await DisplayGalleryModal(); // Il faut d'abord gérer l'affichage des projets
-    DeleteWork();
     ControlFormAddProjet();
     PreviewNewWork();
 };

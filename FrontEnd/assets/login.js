@@ -40,17 +40,15 @@ function init() {
         e.preventDefault(); // // Bloque l'action par défaut du navigateur
         const emailUser = email.value;
         const passwordUser = password.value;
-        console.log(emailUser, passwordUser)
-        console.log(!emailUser.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/))
         let isvalid = true;
-        if (emailUser !== "sophie.bluel@test.tld" || !emailUser.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/)) {
+        if (emailUser === "") {
             isvalid = false;
             document.getElementById("errormail").style.display = "block"; // Le message d'erreur s'affiche
             console.log("email")
         } else {
             document.getElementById("errormail").style.display = "none"; // Le message d'erreur ne s'affiche pas
         }
-        if (passwordUser !== "S0phie") {
+        if (passwordUser === "") {
             isvalid = false;
             document.getElementById("errorpassword").style.display = "block"; // Le message d'erreur s'affiche
             console.log("password")

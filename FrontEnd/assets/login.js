@@ -40,24 +40,19 @@ function init() {
         e.preventDefault(); // // Bloque l'action par défaut du navigateur
         const emailUser = email.value;
         const passwordUser = password.value;
-        let isvalid = true;
         if (emailUser === "") {
-            isvalid = false;
             document.getElementById("errormail").style.display = "block"; // Le message d'erreur s'affiche
             console.log("email")
         } else {
             document.getElementById("errormail").style.display = "none"; // Le message d'erreur ne s'affiche pas
         }
         if (passwordUser === "") {
-            isvalid = false;
             document.getElementById("errorpassword").style.display = "block"; // Le message d'erreur s'affiche
             console.log("password")
         } else {
             document.getElementById("errorpassword").style.display = "none"; // Le message d'erreur ne s'affiche pas
         }
-        if (isvalid) {
-            login(); // Si "isvalid", la fonction "login" s'éxécute
-        }
+        login(); // Si les champs sont remplis, la fonction "login" s'éxécute
     })
 }
 init();
